@@ -1,7 +1,9 @@
 # CS354 - Programming Languages
-### _*Class Description:*_ <br/>
-CS354 Programming languages <br/>
-/*insert the course description*/
-<br/>
-Professor Jim Buff...
-Onyx: ~jimbuff...
+## Professor Jim Buffenbarger
+## Onyx: ~jbuffenb/classes/354/pub/
+## Spring 2020
+### _*Course Description:*_ 
+Principles of programming languages: design, syntax, semantics, information
+binding, strings, arithmetic, input/output, recursion and extensibility.
+
+
