@@ -1,0 +1,17 @@
+(define super-duper 
+    (lambda (source count)
+        (cond 
+            ;If source is null then return empty list
+            ((null? source) '())
+            ;If source is not a list then return the source
+            ((not (list? source)) source)
+            ;If source is a single element list then duplicate that element count times and return it
+            ((null? (cdr source)) (make-list count (car source)))
+            (else 
+                ;Otherwise, recurse with first element of the source and duplicate, then combine with
+                ;rest of source passed into recursive function
+                (append (make-list count (super-duper (car source) count)) (super-duper (cdr source) count))
+            )
+        )
+    )
+)
