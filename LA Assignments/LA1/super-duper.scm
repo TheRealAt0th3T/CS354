@@ -9,8 +9,9 @@
 
 ;source is the list 
 ;count is the amount neet to be repeated/copied
-(define (super-duper source count)
-    (cond
+(define super-duper 
+    (testing-suite (source count)
+         (cond
         ;checking if source is null -- if so return it
         ((null? source) source)
      
@@ -25,6 +26,7 @@
         ;otherwise that means its a much longer list with multiple elements
         ;repeat first element and then cons it to the next repeat
         (else (cons (make-list count (super-duper (car source) count)) super-duper(cdr source count)))
+         )
      )
   )
 
