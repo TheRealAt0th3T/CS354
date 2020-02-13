@@ -6,22 +6,23 @@
 ;notes
 ;car evals first element of a list
 ;cdr evals the rest of the list
+;cond and ifs are very similar 
+  ;conds are like a nonlooping switch statement
+  ;ifs are like normal java
 
 ;function to be able to recursively deal with repeating elements
 (define (repeat sourceR countR)
-  (cond
-    ;checking if count is greater than one 
-    ((> countR 1) 
-      (cond
-        ;check if pair -- if so move down list repeating and consing 
-        ;count down the countR in order to access entire list/pair
-        ((pair? sourceR) (cons (car sourceR) (repeat sourceR (- countR 1))) sourceR)
-      )
-    sourceR
+   ;checking if count is greater than one 
+  (if (> countR 1) 
+    (if (pair? sourceR)
+      ;check if pair -- if so move down list repeating and consing 
+      ;count down the countR in order to access entire list/pair
+      (cons (car sourceR) (repeat sourceR (- countR 1)))
+      sourceR
     )
+    sourceR
   )
 )
-
 
 ;source is the list 
 ;count is the amount neet to be repeated/copied
