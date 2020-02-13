@@ -13,6 +13,7 @@
     ；(testing-suite (source count)
          (cond
         ;checking if source is null -- if so return it
+        ;this if for empty lists
         ((null? source) source)
      
         ;is it a number? if so return the number 
@@ -21,11 +22,23 @@
      
         ;is it a list?? repeat count times and return it
         ;check if more than one element exists, if not, make a list that repeats count times for that first element
-        ((null? (cdr source)) (make-list count (car source)))
+        ;deals with single element lists correctly
+        ((null? (cdr source))(make-list count (car source)))
+     
+        ;ACTUALLY THE CONDITION FOR ALL LISTS OF MULTIPLE ELEMENTS!!!
+        ((list? (cdr source)) display "help"
+          ;(cons (make-list count (super-duper (car source) count)) super-duper (cdr source) count
+          ;)
+        )
+     
+     ;pair
+     ;null
+     ;symbol
+     ;number
      
         ;otherwise that means its a much longer list with multiple elements
         ;repeat first element and then cons it to the next repeat
-        (else (cons (make-list count (super-duper (car source) count)) super-duper(cdr source count)))
+        ;(else (cons (make-list count (super-duper (car source) count)) super-duper(cdr source count)))
          )
      )
  ； )
