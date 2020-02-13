@@ -14,7 +14,7 @@
         ((null? source) source)
      
         ;is it a number? if so return the number 
-        ;based of examples -- numbers get returned regaurdless
+        ;based of examples -- numbers get returned regaurdless of count number
         ((number? source) source)
      
         ;is it a list?? repeat count times and return it
