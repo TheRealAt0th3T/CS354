@@ -1,6 +1,7 @@
 ;Amara Tariq
-;CS354
+;CS354 Programming Languages
 ;LA1 - Scheme
+;take an atom (list) and duplicate the elements by the number of times that the user specifies in the input
 
 ;notes
 ;car evals first element of a list
