@@ -140,6 +140,42 @@ public class Scanner {
 	token=new Token(lexeme); // one-char operator
     }
 
+ //cheking if comment
+    private void nextComment(){
+      int old = pos;
+      pos = old + 2; //to check if the next two characters match characters for comments
+      many(comments);
+      String lexeme = program.substring(old, pos); //stores the entire comment 
+      if(temp.equals("$$"){ //checking for single line comment
+        while(!done()){ //loop until no longer a comment
+          lexeme = program.substring(old,pos); 
+          pos++;
+        }
+        temp = program.substring(old,pos);
+      } else if(lexeme.equals("$^")){ //checking for comment block
+        while(!lexeme. ){//aogfvneajrgvljk ---- HOW TO CHECK FOR THE LAST TWO CHARS
+          pos++;
+          lexeme = program.substring(old, pos);
+        }
+        lexeme = program.substring(old, pos);
+    } else if(program.substring(old, pos + 1).equals("$#$")){ //checking for javadoc
+      pos++;
+      lexeme = program(old, pos);
+      while(!lexeme. ){ //HOW TO CHECK FOR THE LAST TWO CHARSSAFJIRNGALEKRO--------
+        pos++;
+        lexeme = program.substring(old, pos);
+      }
+    }
+    
+    //check to see if done
+    if(done()){ 
+      token = new Token("comment"); 
+      } else {
+         next();
+         }
+ }
+
+
     // This method determines the kind of the next token (e.g., "id"),
     // and calls a method to scan that token's lexeme (e.g., "foo").
     public boolean next() {
@@ -162,42 +198,7 @@ public class Scanner {
 	}
 	return true;
     }
-    
-    //cheking if comment
-    private void nextComment(){
-      int old = pos;
-      pos = old + 2; //to check if the next two characters match characters for comments
-      many(comments);
-      String temp = program.substring(old, pos); //stores the entire comment 
-      if(temp.equals("$$"){ //checking for single line comment
-        while(!done()){ //loop until no longer a comment
-          temp = program.substring(old,pos); 
-          pos++;
-        }
-        temp = program.substring(old,pos);
-      } else if(temp.equals("$^")){ //checking for comment block
-        while(!temp. ){//aogfvneajrgvljk ---- HOW TO CHECK FOR THE LAST TWO CHARS
-          pos++;
-          temp = program.substring(old, pos);
-        }
-        temp = program.substring(old, pos);
-    } else if(program.substring(old, pos + 1).equals("$#$")){ //checking for javadoc
-      pos++;
-      temp = program(old, pos);
-      while(!temp. ){ //HOW TO CHECK FOR THE LAST TWO CHARSSAFJIRNGALEKRO--------
-        pos++;
-        temp = program.substring(old, pos);
-      }
-    }
-    
-    //check to see if done
-    if(done()){ 
-      token = new Token("comment"); 
-      } else {
-         next();
-         }
- }
-    
+ 
 
     // This method scans the next lexeme,
     // if the current token is the expected token.
