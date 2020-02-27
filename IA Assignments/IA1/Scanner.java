@@ -1,3 +1,4 @@
+//AMARA TARIQ
 // This class is a scanner for the program
 // and programming language being interpreted.
 
@@ -17,8 +18,9 @@ public class Scanner {
     private Set<String> keywords=new HashSet<String>();
     private Set<String> operators=new HashSet<String>();
 
+	
+	
     // initializers for previous sets
-
     private void fill(Set<String> s, char lo, char hi) {
 	for (char c=lo; c<=hi; c++)
 	    s.add(c+"");
