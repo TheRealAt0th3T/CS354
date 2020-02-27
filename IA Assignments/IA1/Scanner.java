@@ -1,4 +1,5 @@
 //AMARA TARIQ
+
 // This class is a scanner for the program
 // and programming language being interpreted.
 
@@ -17,9 +18,11 @@ public class Scanner {
     private Set<String> legits=new HashSet<String>();
     private Set<String> keywords=new HashSet<String>();
     private Set<String> operators=new HashSet<String>();
-
-	
-	
+    
+    //SETS FOR COMMENTS AND MINUS OPERATOR
+    private Set<String> comments = new HashSet<String>();
+    private Set<String> minus = new HashSet<String>(); //wait but its in the operators???
+    
     // initializers for previous sets
     private void fill(Set<String> s, char lo, char hi) {
 	for (char c=lo; c<=hi; c++)
@@ -59,6 +62,17 @@ public class Scanner {
 
     private void initKeywords(Set<String> s) {
     }
+  
+  //creating symbols for a form of commenting
+  //setting a string to be the set of symbols for commenting
+    private void initComments(Set<String> s){
+      s.add("$$"); //for a single line
+      s.add("$^"); //starting a block
+      s.add("$#$"); //startign javadocs
+      s.add("^$");  //ending
+    }
+    
+    //implementing a minus operator
 
     // constructor:
     //   - squirrel-away source program
@@ -73,6 +87,8 @@ public class Scanner {
 	initLegits(legits);
 	initKeywords(keywords);
 	initOperators(operators);
+  
+  intitComments(comments);
     }
 
     // handy string-processing methods
@@ -146,6 +162,42 @@ public class Scanner {
 	}
 	return true;
     }
+    
+    //cheking if comment
+    private void nextComment(){
+      int old = pos;
+      pos = old + 2; //to check if the next two characters match characters for comments
+      many(comments);
+      String temp = program.substring(old, pos); //stores the entire comment 
+      if(temp.equals("$$"){ //checking for single line comment
+        while(!done()){ //loop until no longer a comment
+          temp = program.substring(old,pos); 
+          pos++;
+        }
+        temp = program.substring(old,pos);
+      } else if(temp.equals("$^")){ //checking for comment block
+        while(!temp. ){//aogfvneajrgvljk ---- HOW TO CHECK FOR THE LAST TWO CHARS
+          pos++;
+          temp = program.substring(old, pos);
+        }
+        temp = program.substring(old, pos);
+    } else if(program.substring(old, pos + 1).equals("$#$")){ //checking for javadoc
+      pos++;
+      temp = program(old, pos);
+      while(!temp. ){ //HOW TO CHECK FOR THE LAST TWO CHARSSAFJIRNGALEKRO--------
+        pos++;
+        temp = program.substring(old, pos);
+      }
+    }
+    
+    //check to see if done
+    if(done()){ 
+      token = new Token("comment"); 
+      } else {
+         next();
+         }
+ }
+    
 
     // This method scans the next lexeme,
     // if the current token is the expected token.
