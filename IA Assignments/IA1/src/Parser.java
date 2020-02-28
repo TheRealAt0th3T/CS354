@@ -1,3 +1,5 @@
+//AMARA TARIQ
+
 // This class is a recursive-descent parser,
 // modeled after the programming language's grammar.
 // It constructs and has-a Scanner for the program
@@ -57,6 +59,12 @@ public class Parser {
 	    match("id");
 	    return new NodeFactId(pos(),id.lex());
 	}
+ if (curr().equals(new Token("-"))){
+   Token minus = curr();
+   match("-");
+   return new NodeMinus(minus.lex());
+ }
+ 
 	Token num=curr();
 	match("num");
 	return new NodeFactNum(num.lex());
@@ -101,8 +109,8 @@ public class Parser {
     public Node parse(String program) throws SyntaxException {
 	scanner=new Scanner(program);
 	scanner.next();
-	NodeStmt stmt=parseStmt();
-	match("EOF");
+	//NodeStmt stmt=parseStmt();
+	//match("EOF");
 	return stmt;
     }
 
