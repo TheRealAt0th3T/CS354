@@ -192,11 +192,12 @@ public class Scanner {
     // This method determines the kind of the next token (e.g., "id"),
     // and calls a method to scan that token's lexeme (e.g., "foo").
     public boolean next() {
-	many(whitespace);
+	//many(whitespace);
 	if (done()) {
-	    token=new Token("EOF");
+	    //token=new Token("EOF");
 	    return false;
 	}
+ many(whitespace);
 	String c=program.charAt(pos)+"";
   if(comments.contains(c+"$") || comments.contains(c+"^") || comments.contains(c+"#$"))
     nextComment();
