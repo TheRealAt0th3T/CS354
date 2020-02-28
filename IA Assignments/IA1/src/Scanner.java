@@ -89,6 +89,7 @@ public class Scanner {
 	initOperators(operators);
   
   intitComments(comments);
+  initMinus(minus);
     }
 
     // handy string-processing methods
@@ -153,7 +154,7 @@ public class Scanner {
         }
         temp = program.substring(old,pos);
       } else if(lexeme.equals("$^")){ //checking for comment block
-        while(!lexeme. ){//aogfvneajrgvljk ---- HOW TO CHECK FOR THE LAST TWO CHARS
+        while(!lexeme.endsWith("^$")){//aogfvneajrgvljk ---- HOW TO CHECK FOR THE LAST TWO CHARS
           pos++;
           lexeme = program.substring(old, pos);
         }
@@ -161,7 +162,7 @@ public class Scanner {
     } else if(program.substring(old, pos + 1).equals("$#$")){ //checking for javadoc
       pos++;
       lexeme = program(old, pos);
-      while(!lexeme. ){ //HOW TO CHECK FOR THE LAST TWO CHARSSAFJIRNGALEKRO--------
+      while(!lexeme.endsWith("^$")){ //HOW TO CHECK FOR THE LAST TWO CHARSSAFJIRNGALEKRO--------
         pos++;
         lexeme = program.substring(old, pos);
       }
@@ -175,6 +176,18 @@ public class Scanner {
          }
  }
 
+  private void nextMinus(){
+    int old = pos;
+    pos = old + 2;
+    String lexeme = program.substring(old, pos);
+    while(!done() && !lexeme.endsWith("-") && !lexeme.endsWith("+") && !lexeme.endsWith("*") && !lexeme.endsWith("/") && !lexeme.endsWith(";")){
+    pos++;
+    lexeme = program.substring(old, pos);
+    }
+    pos--;
+    lexeme = program.substring(old, pos);
+    token = new Token("number",program.substring(old,pos));
+  }
 
     // This method determines the kind of the next token (e.g., "id"),
     // and calls a method to scan that token's lexeme (e.g., "foo").
@@ -185,10 +198,14 @@ public class Scanner {
 	    return false;
 	}
 	String c=program.charAt(pos)+"";
-	if (digits.contains(c))
+  if(comments.contains(c+"$") || comments.contains(c+"^") || comments.contains(c+"#$"))
+    nextComment();
+	else if (digits.contains(c))
 	    nextNumber();
 	else if (letters.contains(c))
 	    nextKwId();
+  else if(minus.contains(c))
+    nextMinus();
 	else if (operators.contains(c))
 	    nextOp();
 	else {
