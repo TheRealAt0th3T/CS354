@@ -1,0 +1,16 @@
+#!/bin/bash
+
+export PATH=/usr/local/bin:/usr/bin:/bin
+export LD_LIBRARY_PATH=/usr/local/lib64:/usr/lib64:/lib64
+
+case "$HOSTNAME" in
+    onyx.*)
+	top=/usr/local/apps/local
+	PATH=$top/bin:$top/usr/bin:$PATH
+	LD_LIBRARY_PATH=$top/lib64:$top/usr/lib64:$LD_LIBRARY_PATH
+
+	# fpc pascal compiler
+	# sudo ln -sf $top/usr/lib64/fpc/3.0.4/ppcx64 $top/usr/bin
+	FPC_ARGS="-Fu$top/usr/lib64/fpc/3.0.4/units/x86_64-linux/rtl"
+	;;
+esac
