@@ -1,0 +1,7 @@
+#!/bin/bash
+
+. ../SetupEnv
+
+set -x
+
+gst Customer.st Account.st CheckingAccount.st SavingsAccount.st Bank.st
