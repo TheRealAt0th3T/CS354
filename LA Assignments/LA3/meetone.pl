@@ -2,20 +2,24 @@
 
 :- include('data.pl').
 
-math(time(_,_,am),time(_,_,pm)).
+meetone(Person, slot(time(StartHour, StartMinute, StartAP), time(EndHour, EndMinute, EndAP))) :- 
+	free(Person, slot(time(StartHourSlot, StartMinuteSlot, StartAPSlot), time(EndHourSlot, EndMinuteSlot, EndAPSlot))),
 
-math(time(T1H,_,AP),time(T2H,_,AP)) :-
-  T1H<T2H.
-  
-math(time(TH,T1M,AP),time(TH,T2M,AP)) :-
-  T1M=<T2M.
+%-----------MATH------------
+	(StartAP = pm -> StartMeetTime is (StartHour * 100) + (StartMinute) + 1200; 
+		StartMeetTime is (StartHour * 100) + (StartMinute)),
+	
+	(EndAP = pm -> EndMeetTime is (EndHour * 100) + (EndMinute) + 1200;
+		EndMeetTime is (EndHour * 100) + (EndMinute)),
+		
+	(StartAPSlot = pm -> StartSlotTime is (StartHourSlot * 100) + (StartMinuteSlot) + 1200;
+		StartSlotTime is (StartHourSlot * 100) + (StartMinuteSlot)),
 
-timein(slot(startHour, startMin), slot(endHour, endMin)) :-
-  math(startHour, startMin), math(endHour, endMin).
-
-meetone(Person, meetSlot) :-
-  free(Person, slot), timein(meetSlot, slot).
-   
+	(EndAPSlot = pm -> EndSlotTime is (EndHourSlot * 100) + (EndMinuteSlot) + 1200;
+		EndSlotTime is (EndHourSlot * 100) + (EndMinuteSlot)),
+		
+	(StartSlotTime =< StartMeetTime), (EndSlotTime >= EndMeetTime).
+	
 main :- findall(Person,
 		meetone(Person,slot(time(8,30,am),time(8,45,am))),
 		People),
